@@ -34,8 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,7 +63,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.cs" />
+    <Compile Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.Designer.cs">
+      <DependentUpon>201711062005484_AddOptionalForeignKeysToAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VetAppointmentBooking.xaml.cs">
+      <DependentUpon>VetAppointmentBooking.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UI\EditAnimal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -62,10 +82,46 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="DAL\DataAccessZoo.cs" />
+    <Compile Include="DataContext\Animal.cs" />
+    <Compile Include="DataContext\CountryOfOrigin.cs" />
+    <Compile Include="DataContext\Environment.cs" />
+    <Compile Include="DataContext\Father.cs" />
+    <Compile Include="DataContext\Mother.cs" />
+    <Compile Include="DataContext\ParentCouple.cs" />
+    <Compile Include="DataContext\Species.cs" />
+    <Compile Include="DataContext\Type.cs" />
+    <Compile Include="DataContext\ZooDBContext.cs" />
+    <Compile Include="Migrations\201711041914238_Initial.cs" />
+    <Compile Include="Migrations\201711041914238_Initial.Designer.cs">
+      <DependentUpon>201711041914238_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs" />
+    <Compile Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.Designer.cs">
+      <DependentUpon>201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs" />
+    <Compile Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.Designer.cs">
+      <DependentUpon>201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.cs" />
+    <Compile Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.Designer.cs">
+      <DependentUpon>201711050812539_ChangeNameOnWeightPropertyInAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Animal.cs" />
+    <Compile Include="Model\UserSearchModel.cs" />
+    <Compile Include="UI\EditAnimal.xaml.cs">
+      <DependentUpon>EditAnimal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\VetAppointmentBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -81,10 +137,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201711041914238_Initial.resx">
+      <DependentUpon>201711041914238_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.resx">
+      <DependentUpon>201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.resx">
+      <DependentUpon>201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.resx">
+      <DependentUpon>201711050812539_ChangeNameOnWeightPropertyInAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.resx">
+      <DependentUpon>201711062005484_AddOptionalForeignKeysToAnimal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,5 +165,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
