@@ -11,7 +11,7 @@ namespace MyZoo.Model
         public int AnimalId { get; set; }
         public string Name { get; set; }
         public string Sex { get; set; }
-        public int WeightInKilogram { get; set; }
+        public float WeightInKilogram { get; set; }
         public string CountryOfOrigin { get; set; }
         public string Species { get; set; }
         public string Type { get; set; }

@@ -84,6 +84,14 @@
     <Compile Include="Migrations\201711071834133_ChangeNameOnFamilyMembersInAnimal.Designer.cs">
       <DependentUpon>201711071834133_ChangeNameOnFamilyMembersInAnimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711071847542_ChangeWeightFromIntToDecimal.cs" />
+    <Compile Include="Migrations\201711071847542_ChangeWeightFromIntToDecimal.Designer.cs">
+      <DependentUpon>201711071847542_ChangeWeightFromIntToDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711071854053_ChangeWeightFromDecimalToFloat.cs" />
+    <Compile Include="Migrations\201711071854053_ChangeWeightFromDecimalToFloat.Designer.cs">
+      <DependentUpon>201711071854053_ChangeWeightFromDecimalToFloat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\VetAppointmentBooking.xaml.cs">
       <DependentUpon>VetAppointmentBooking.xaml</DependentUpon>
@@ -134,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711071834133_ChangeNameOnFamilyMembersInAnimal.resx">
       <DependentUpon>201711071834133_ChangeNameOnFamilyMembersInAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711071847542_ChangeWeightFromIntToDecimal.resx">
+      <DependentUpon>201711071847542_ChangeWeightFromIntToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711071854053_ChangeWeightFromDecimalToFloat.resx">
+      <DependentUpon>201711071854053_ChangeWeightFromDecimalToFloat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

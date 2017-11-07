@@ -24,7 +24,7 @@ namespace MyZoo.DataContext
         [StringLength(100)]
         public string Name { get; set; }
 
-        public int Weight { get; set; }
+        public float Weight { get; set; }
 
         [Required]
         [StringLength(6)]
@@ -52,5 +52,10 @@ namespace MyZoo.DataContext
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journals { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Species.Name} - \"{Name}\"";
+        }
     }
 }

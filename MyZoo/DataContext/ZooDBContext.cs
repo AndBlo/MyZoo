@@ -29,17 +29,17 @@ namespace MyZoo.DataContext
         {
             modelBuilder.Entity<Animal>()
                 .HasMany(e => e.FamiliesChildren)
-                .WithOptional(e => e.Animal)
+                .WithOptional(e => e.AnimalChild)
                 .HasForeignKey(e => e.ChildId);
 
             modelBuilder.Entity<Animal>()
                 .HasMany(e => e.FamiliesFathers)
-                .WithOptional(e => e.Animal1)
+                .WithOptional(e => e.AnimalMother)
                 .HasForeignKey(e => e.FatherId);
 
             modelBuilder.Entity<Animal>()
                 .HasMany(e => e.FamiliesMothers)
-                .WithOptional(e => e.Animal2)
+                .WithOptional(e => e.AnimalFather)
                 .HasForeignKey(e => e.MotherId);
         }
     }

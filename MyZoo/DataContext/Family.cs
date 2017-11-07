@@ -16,10 +16,10 @@ namespace MyZoo.DataContext
 
         public int? FatherId { get; set; }
 
-        public virtual Animal Animal { get; set; }
+        public virtual Animal AnimalChild { get; set; }
 
-        public virtual Animal Animal1 { get; set; }
+        public virtual Animal AnimalMother { get; set; }
 
-        public virtual Animal Animal2 { get; set; }
+        public virtual Animal AnimalFather { get; set; }
     }
 }

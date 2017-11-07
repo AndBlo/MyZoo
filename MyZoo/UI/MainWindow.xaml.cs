@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyZoo.Migrations;
 
 namespace MyZoo
 {
@@ -26,6 +27,8 @@ namespace MyZoo
         public MainWindow()
         {
             InitializeComponent();
+            //Configuration conf = new Configuration();
+            //conf.doIt();
         }
 
         private void ButtonSearch_OnClick(object sender, RoutedEventArgs e)
