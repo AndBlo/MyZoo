@@ -7,194 +7,106 @@ namespace MyZoo.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MyZoo.DataContext.ZooDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MyZoo.DataContext.ZooDataBaseContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MyZoo.DataContext.ZooDBContext context)
+        protected override void Seed(MyZoo.DataContext.ZooDataBaseContext context)
         {
-            DataContext.Type type1 = new DataContext.Type()
-
+            Country sweden = new Country()
             {
-
-                Name = "Köttätare"
-
-            };
-
-            DataContext.Type type2 = new DataContext.Type()
-
-            {
-
-                Name = "Växtätare"
-
-            };
-
-
-
-            DataContext.Environment environment1 = new DataContext.Environment()
-
-            {
-
-                Name = "Mark"
-
-            };
-
-            DataContext.Environment environment2 = new DataContext.Environment()
-
-            {
-
-                Name = "Träd"
-
-            };
-
-            DataContext.Environment environment3 = new DataContext.Environment()
-
-            {
-
-                Name = "Vatten"
-
-            };
-
-
-
-            CountryOfOrigin coo1 = new CountryOfOrigin()
-
-            {
-
                 Name = "Sverige"
-
             };
-
-            CountryOfOrigin coo2 = new CountryOfOrigin()
-
+            Country russia = new Country()
             {
-
                 Name = "Ryssland"
-
+            };
+            Country zimbabwe = new Country()
+            {
+                Name = "Zimbabwe"
             };
 
-
-
-            CountryOfOrigin coo3 = new CountryOfOrigin()
-
+            DataContext.Type carnivore = new DataContext.Type()
             {
-
-                Name = "Zambia"
-
+                Name = "Köttätare"
+            };
+            DataContext.Type herbivore = new DataContext.Type()
+            {
+                Name = "Växtätare"
             };
 
-
-
-            Species species1 = new Species()
-
+            DataContext.Environment ground = new DataContext.Environment()
             {
+                Name = "Mark"
+            };
+            DataContext.Environment tree = new DataContext.Environment()
+            {
+                Name = "Träd"
+            };
+            DataContext.Environment water = new DataContext.Environment()
+            {
+                Name = "Vatten"
+            };
 
+            Species bear = new Species()
+            {
                 Name = "Björn",
-
-                Environment = environment1,
-
-                Type = type1
-
+                Environment = ground,
+                Type = carnivore
+            };
+            Species amazonParrot = new Species()
+            {
+                Name = "Amazonpapegoja",
+                Environment = tree,
+                Type = herbivore
+            };
+            Species seal = new Species()
+            {
+                Name = "Knubbsäl",
+                Environment = water,
+                Type = carnivore
             };
 
-
-
-            Species species2 = new Species()
-
+            Animal bearMotherPascha = new Animal()
             {
-
-                Name = "Giraff",
-
-                Environment = environment1,
-
-                Type = type2
-
-            };
-
-
-
-            Animal giraff = new Animal()
-
-            {
-
-                Name = "Örjan",
-
-                Weight = 400,
-
-                Sex = "Hane",
-
-                CountryOfOrigin = coo3,
-
-                Species = species2
-
-            };
-
-
-
-            Animal animal1Father = new Animal()
-
-            {
-
-                Name = "Sture",
-
-                Weight = 200,
-
-                Sex = "Hane",
-
-                CountryOfOrigin = coo1,
-
-                Species = species1
-
-            };
-
-
-
-            Animal animal3Mother = new Animal()
-
-            {
-
                 Name = "Pascha",
-
-                Sex = "Hona",
-
-                Weight = 165,
-
-                CountryOfOrigin = coo2,
-
-                Species = species1
-
+                Weight = 145,
+                Species = bear,
+                Country = russia
             };
-
-            Animal animal2Child = new Animal()
+            Animal bearFatherSture = new Animal()
+            {
+                Name = "Sture",
+                Weight = 230,
+                Species = bear,
+                Country = sweden
+            };
+            Animal bearChildBjorne = new Animal()
             {
                 Name = "Björne",
-                Weight = 130,
-                Sex = "Hane",
-                CountryOfOrigin = coo1,
-                Species = species1
+                Weight = 95,
+                Species = bear,
+
             };
 
-            Animal animal4 = new Animal()
+            Animal parrotMotherDoris = new Animal()
             {
-                Name = "Putin",
-                Weight = 278,
-                Sex = "Hane",
-                CountryOfOrigin = coo2,
-
-                Species = species1
-
+                Name = "Doris",
+                Weight = 1,
+                Species = amazonParrot,
+                Country = sweden
             };
-
-            context.Animals.AddOrUpdate(p => p.Name,
-
-                animal2Child,
-
-                animal4,
-
-                giraff);
+            Animal parrotFatherGreger = new Animal()
+            {
+                Name = "Greger",
+                Weight = 1,
+                Species = amazonParrot,
+                Country = sweden
+            };
+            Animal parrotChildSvea
         }
     }
 }

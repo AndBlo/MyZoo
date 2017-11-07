@@ -1,60 +1,46 @@
-using System.Data.Entity.Migrations.Model;
-
 namespace MyZoo.DataContext
 {
     using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public class ZooDBContext : DbContext
+    public partial class ZooDataBaseContext : DbContext
     {
-        // Your context has been configured to use a 'ZooDBContext' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'MyZoo.DataContext.ZooDBContext' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'ZooDBContext' 
-        // connection string in the application configuration file.
-        public ZooDBContext()
-            : base("name=ZooDBContext")
+        public ZooDataBaseContext()
+            : base("name=ZooDataBaseContext")
         {
         }
 
         public virtual DbSet<Animal> Animals { get; set; }
-        public virtual DbSet<CountryOfOrigin> CountryOfOrigins { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Diagnosis> Diagnoses { get; set; }
         public virtual DbSet<Environment> Environments { get; set; }
-        public virtual DbSet<Father> Fathers { get; set; }
-        public virtual DbSet<Mother> Mothers { get; set; }
-        //public virtual DbSet<ParentCouple> ParentCouples { get; set; }
+        public virtual DbSet<Family> Families { get; set; }
+        public virtual DbSet<Journal> Journals { get; set; }
+        public virtual DbSet<JournalsDiagnos> JournalsDiagnoses { get; set; }
+        public virtual DbSet<Medication> Medications { get; set; }
         public virtual DbSet<Species> Species { get; set; }
         public virtual DbSet<Type> Types { get; set; }
-
+        public virtual DbSet<Veterinarian> Veterinarians { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Animal>()
-            //    .HasOptional(p => p.ParentCouple)
-            //    .WithMany(a => a.Animals);
+            modelBuilder.Entity<Animal>()
+                .HasMany(e => e.FamiliesChildren)
+                .WithOptional(e => e.Animal)
+                .HasForeignKey(e => e.ChildId);
 
-            modelBuilder.Entity<Father>()
-                .HasRequired(a => a.Animal)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Animal>()
+                .HasMany(e => e.FamiliesFathers)
+                .WithOptional(e => e.Animal1)
+                .HasForeignKey(e => e.FatherId);
 
-            modelBuilder.Entity<Mother>()
-                .HasRequired(a => a.Animal)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<ParentCouple>()
-                .HasOptional(m => m.Mother)
-                .WithMany()
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ParentCouple>()
-                .HasOptional(m => m.Father)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Animal>()
+                .HasMany(e => e.FamiliesMothers)
+                .WithOptional(e => e.Animal2)
+                .HasForeignKey(e => e.MotherId);
         }
     }
-
 }

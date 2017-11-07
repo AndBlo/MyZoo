@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MyZoo.DataContext
 {
-    class Family
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class Family
     {
         public int FamilyId { get; set; }
 
-        public virtual Animal Child { get; set; }
-        public virtual Animal Mother { get; set; }
-        public virtual Animal Father { get; set; }
+        public int? ChildId { get; set; }
+
+        public int? MotherId { get; set; }
+
+        public int? FatherId { get; set; }
+
+        public virtual Animal Animal { get; set; }
+
+        public virtual Animal Animal1 { get; set; }
+
+        public virtual Animal Animal2 { get; set; }
     }
 }

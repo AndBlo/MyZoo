@@ -13,7 +13,7 @@ namespace MyZoo.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711071042449_Initial"; }
+            get { return "201711071612429_Initial"; }
         }
         
         string IMigrationMetadata.Source

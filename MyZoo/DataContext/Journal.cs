@@ -6,21 +6,21 @@ namespace MyZoo.DataContext
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Environment
+    public partial class Journal
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Environment()
+        public Journal()
         {
-            Species = new HashSet<Species>();
+            JournalsDiagnoses = new HashSet<JournalsDiagnos>();
         }
 
-        public int EnvironmentId { get; set; }
+        public int JournalId { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        public int AnimalId { get; set; }
+
+        public virtual Animal Animal { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Species> Species { get; set; }
+        public virtual ICollection<JournalsDiagnos> JournalsDiagnoses { get; set; }
     }
 }

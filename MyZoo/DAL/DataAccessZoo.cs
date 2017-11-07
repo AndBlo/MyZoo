@@ -24,97 +24,97 @@ namespace MyZoo.DAL
         {
             BindingList<AnimalDetailed> list;
 
-            using (var db = new ZooDBContext())
+            using (var db = new ZooDataBaseContext())
             {
                 if (search.SpeciesSearch != "")
                 {
-                    var query =
-                        from animal in db.Animals
-                        where animal.Species.Name.ToLower()
-                            .Contains(search.SpeciesSearch.ToLower())
-                        join parent in db.ParentCouples
-                            on animal.ParentCouple.ParentCoupleId equals parent.ParentCoupleId into ap
-                        from p in ap.DefaultIfEmpty()
-                        select new AnimalDetailed()
-                        {
-                            AnimalId = animal.AnimalId,
-                            CountryOfOrigin = animal.CountryOfOrigin.Name,
-                            Environment = animal.Species.Environment.Name,
-                            Father = animal.ParentCouple.Father.Animal.Name,
-                            Mother = animal.ParentCouple.Mother.Animal.Name,
-                            Name = animal.Name,
-                            Sex = animal.Sex,
-                            Species = animal.Species.Name,
-                            Type = animal.Species.Type.Name,
-                            WeightInKilogram = animal.Weight,
-                        };
+                    //var query =
+                    //    from animal in db.Animals
+                    //    where animal.Species.Name.ToLower()
+                    //        .Contains(search.SpeciesSearch.ToLower())
+                    //    join parent in db.ParentCouples
+                    //        on animal.ParentCouple.ParentCoupleId equals parent.ParentCoupleId into ap
+                    //    from p in ap.DefaultIfEmpty()
+                    //    select new AnimalDetailed()
+                    //    {
+                    //        AnimalId = animal.AnimalId,
+                    //        CountryOfOrigin = animal.CountryOfOrigin.Name,
+                    //        Environment = animal.Species.Environment.Name,
+                    //        Father = animal.ParentCouple.Father.Animal.Name,
+                    //        Mother = animal.ParentCouple.Mother.Animal.Name,
+                    //        Name = animal.Name,
+                    //        Sex = animal.Sex,
+                    //        Species = animal.Species.Name,
+                    //        Type = animal.Species.Type.Name,
+                    //        WeightInKilogram = animal.Weight,
+                    //    };
 
-                    list = new BindingList<AnimalDetailed>(query.ToList());
+                    //list = new BindingList<AnimalDetailed>(query.ToList());
                 }
                 else
                 {
-                    var query =
-                        from animal in db.Animals
-                        join parent in db.ParentCouples
-                            on animal.ParentCouple.ParentCoupleId equals parent.ParentCoupleId into ap
-                        from p in ap.DefaultIfEmpty()
-                        select new AnimalDetailed()
-                        {
-                            AnimalId = animal.AnimalId,
-                            CountryOfOrigin = animal.CountryOfOrigin.Name,
-                            Environment = animal.Species.Environment.Name,
-                            Father = animal.ParentCouple.Father.Animal.Name,
-                            Mother = animal.ParentCouple.Mother.Animal.Name,
-                            Name = animal.Name,
-                            Sex = animal.Sex,
-                            Species = animal.Species.Name,
-                            Type = animal.Species.Type.Name,
-                            WeightInKilogram = animal.Weight,
+                    //var query =
+                    //    from animal in db.Animals
+                    //    join parent in db.ParentCouples
+                    //        on animal.ParentCouple.ParentCoupleId equals parent.ParentCoupleId into ap
+                    //    from p in ap.DefaultIfEmpty()
+                    //    select new AnimalDetailed()
+                    //    {
+                    //        AnimalId = animal.AnimalId,
+                    //        CountryOfOrigin = animal.CountryOfOrigin.Name,
+                    //        Environment = animal.Species.Environment.Name,
+                    //        Father = animal.ParentCouple.Father.Animal.Name,
+                    //        Mother = animal.ParentCouple.Mother.Animal.Name,
+                    //        Name = animal.Name,
+                    //        Sex = animal.Sex,
+                    //        Species = animal.Species.Name,
+                    //        Type = animal.Species.Type.Name,
+                    //        WeightInKilogram = animal.Weight,
 
-                        };
+                    //    };
 
-                    list = new BindingList<AnimalDetailed>(query.ToList());
+                    //list = new BindingList<AnimalDetailed>(query.ToList());
                 }
 
             }
 
-            return list;
+            return new BindingList<AnimalDetailed>();
         }
 
         public void RemoveAnimal(int animalId)
         {
-            using (var db = new ZooDBContext())
-            {
-                var animalQuery = from animal in db.Animals
-                                  where animal.AnimalId == animalId
-                                  select animal;
+            //using (var db = new ZooDataBaseContext())
+            //{
+            //    var animalQuery = from animal in db.Animals
+            //                      where animal.AnimalId == animalId
+            //                      select animal;
 
-                var mother = animalQuery.Select(a => a.ParentCouple.Mother);
+            //    var mother = animalQuery.Select(a => a.ParentCouple.Mother);
 
-                var father = animalQuery.Select(f => f.ParentCouple.Father);
+            //    var father = animalQuery.Select(f => f.ParentCouple.Father);
 
-                var list = animalQuery;
-                //list.Select(p => p.ParentCouple).Select(f => f.Father) = father
+            //    var list = animalQuery;
+            //    list.Select(p => p.ParentCouple).Select(f => f.Father) = father
 
-                if (db.Mothers.Any(a => a.Animal.AnimalId == animalId))
-                {
-                    var couple = db.ParentCouples.Find(db.Mothers.FirstOrDefault(m => m.Animal.AnimalId == animalId));
-                    var mothr = db.Animals.Find(animalId);
-                    db.Animals.Remove(db.Animals.Find(animalId));
-                }
-                if (db.Fathers.Any(a => a.Animal.AnimalId == animalId))
-                {
-                    var couple = db.ParentCouples.Find(db.Fathers.FirstOrDefault(m => m.Animal.AnimalId == animalId));
-                    couple.Father = null;
-                    db.Animals.Remove(db.Animals.Find(animalId));
-                }
-                else
-                {
-                    db.Animals.Remove(db.Animals.Find(animalId));
-                }
+            //    if (db.Mothers.Any(a => a.Animal.AnimalId == animalId))
+            //    {
+            //        var couple = db.ParentCouples.Find(db.Mothers.FirstOrDefault(m => m.Animal.AnimalId == animalId));
+            //        var mothr = db.Animals.Find(animalId);
+            //        db.Animals.Remove(db.Animals.Find(animalId));
+            //    }
+            //    if (db.Fathers.Any(a => a.Animal.AnimalId == animalId))
+            //    {
+            //        var couple = db.ParentCouples.Find(db.Fathers.FirstOrDefault(m => m.Animal.AnimalId == animalId));
+            //        couple.Father = null;
+            //        db.Animals.Remove(db.Animals.Find(animalId));
+            //    }
+            //    else
+            //    {
+            //        db.Animals.Remove(db.Animals.Find(animalId));
+            //    }
 
-                db.SaveChanges();
-            }
+            //    db.SaveChanges();
+            //}
         }
     }
 }

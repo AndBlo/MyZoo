@@ -63,10 +63,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataContext\Animal.cs" />
+    <Compile Include="DataContext\Booking.cs" />
+    <Compile Include="DataContext\Country.cs" />
+    <Compile Include="DataContext\Diagnosis.cs" />
+    <Compile Include="DataContext\Environment.cs" />
     <Compile Include="DataContext\Family.cs" />
-    <Compile Include="Migrations\201711071042449_Initial.cs" />
-    <Compile Include="Migrations\201711071042449_Initial.Designer.cs">
-      <DependentUpon>201711071042449_Initial.cs</DependentUpon>
+    <Compile Include="DataContext\Journal.cs" />
+    <Compile Include="DataContext\JournalsDiagnos.cs" />
+    <Compile Include="DataContext\Medication.cs" />
+    <Compile Include="DataContext\Species.cs" />
+    <Compile Include="DataContext\Type.cs" />
+    <Compile Include="DataContext\Veterinarian.cs" />
+    <Compile Include="DataContext\ZooDBContext.cs" />
+    <Compile Include="Migrations\201711071612429_Initial.cs" />
+    <Compile Include="Migrations\201711071612429_Initial.Designer.cs">
+      <DependentUpon>201711071612429_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711071834133_ChangeNameOnFamilyMembersInAnimal.cs" />
+    <Compile Include="Migrations\201711071834133_ChangeNameOnFamilyMembersInAnimal.Designer.cs">
+      <DependentUpon>201711071834133_ChangeNameOnFamilyMembersInAnimal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\VetAppointmentBooking.xaml.cs">
@@ -85,15 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL\DataAccessZoo.cs" />
-    <Compile Include="DataContext\Animal.cs" />
-    <Compile Include="DataContext\CountryOfOrigin.cs" />
-    <Compile Include="DataContext\Environment.cs" />
-    <Compile Include="DataContext\Father.cs" />
-    <Compile Include="DataContext\Mother.cs" />
-    <Compile Include="DataContext\ParentCouple.cs" />
-    <Compile Include="DataContext\Species.cs" />
-    <Compile Include="DataContext\Type.cs" />
-    <Compile Include="DataContext\ZooDBContext.cs" />
     <Compile Include="Model\Animal.cs" />
     <Compile Include="Model\UserSearchModel.cs" />
     <Compile Include="UI\EditAnimal.xaml.cs">
@@ -122,8 +129,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201711071042449_Initial.resx">
-      <DependentUpon>201711071042449_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711071612429_Initial.resx">
+      <DependentUpon>201711071612429_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711071834133_ChangeNameOnFamilyMembersInAnimal.resx">
+      <DependentUpon>201711071834133_ChangeNameOnFamilyMembersInAnimal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
