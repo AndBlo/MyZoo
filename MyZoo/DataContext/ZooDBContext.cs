@@ -24,17 +24,36 @@ namespace MyZoo.DataContext
         public virtual DbSet<Environment> Environments { get; set; }
         public virtual DbSet<Father> Fathers { get; set; }
         public virtual DbSet<Mother> Mothers { get; set; }
-        public virtual DbSet<ParentCouple> ParentCouples { get; set; }
+        //public virtual DbSet<ParentCouple> ParentCouples { get; set; }
         public virtual DbSet<Species> Species { get; set; }
         public virtual DbSet<Type> Types { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Animal>()
+            //    .HasOptional(p => p.ParentCouple)
+            //    .WithMany(a => a.Animals);
 
+            modelBuilder.Entity<Father>()
+                .HasRequired(a => a.Animal)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<Mother>()
+                .HasRequired(a => a.Animal)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ParentCouple>()
+                .HasOptional(m => m.Mother)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ParentCouple>()
+                .HasOptional(m => m.Father)
+                .WithMany()
+                .WillCascadeOnDelete(false);
         }
     }
 

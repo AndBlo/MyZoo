@@ -11,8 +11,8 @@ namespace MyZoo.DataContext
     public class Mother
     {
         [Key]
-        [ForeignKey("Animal")]
-        public int? AnimalId { get; set; }
+        public int MotherId { get; set; }
+
         public virtual Animal Animal { get; set; }
     }
 }

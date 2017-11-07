@@ -63,10 +63,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.cs" />
-    <Compile Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.Designer.cs">
-      <DependentUpon>201711062005484_AddOptionalForeignKeysToAnimal.cs</DependentUpon>
+    <Compile Include="DataContext\Family.cs" />
+    <Compile Include="Migrations\201711071042449_Initial.cs" />
+    <Compile Include="Migrations\201711071042449_Initial.Designer.cs">
+      <DependentUpon>201711071042449_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UI\VetAppointmentBooking.xaml.cs">
       <DependentUpon>VetAppointmentBooking.xaml</DependentUpon>
     </Compile>
@@ -92,23 +94,6 @@
     <Compile Include="DataContext\Species.cs" />
     <Compile Include="DataContext\Type.cs" />
     <Compile Include="DataContext\ZooDBContext.cs" />
-    <Compile Include="Migrations\201711041914238_Initial.cs" />
-    <Compile Include="Migrations\201711041914238_Initial.Designer.cs">
-      <DependentUpon>201711041914238_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs" />
-    <Compile Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.Designer.cs">
-      <DependentUpon>201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs" />
-    <Compile Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.Designer.cs">
-      <DependentUpon>201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.cs" />
-    <Compile Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.Designer.cs">
-      <DependentUpon>201711050812539_ChangeNameOnWeightPropertyInAnimal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Animal.cs" />
     <Compile Include="Model\UserSearchModel.cs" />
     <Compile Include="UI\EditAnimal.xaml.cs">
@@ -137,20 +122,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201711041914238_Initial.resx">
-      <DependentUpon>201711041914238_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711050806328_ChangeWeightToIntegerAndNamedToKilo.resx">
-      <DependentUpon>201711050806328_ChangeWeightToIntegerAndNamedToKilo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.resx">
-      <DependentUpon>201711050810465_ChangeAnimalForeignKeyToNullableInMotherAndFather.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711050812539_ChangeNameOnWeightPropertyInAnimal.resx">
-      <DependentUpon>201711050812539_ChangeNameOnWeightPropertyInAnimal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711062005484_AddOptionalForeignKeysToAnimal.resx">
-      <DependentUpon>201711062005484_AddOptionalForeignKeysToAnimal.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711071042449_Initial.resx">
+      <DependentUpon>201711071042449_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

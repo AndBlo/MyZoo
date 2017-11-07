@@ -7,13 +7,13 @@ namespace MyZoo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddOptionalForeignKeysToAnimal : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddOptionalForeignKeysToAnimal));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711062005484_AddOptionalForeignKeysToAnimal"; }
+            get { return "201711071042449_Initial"; }
         }
         
         string IMigrationMetadata.Source

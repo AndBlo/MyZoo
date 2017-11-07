@@ -13,7 +13,7 @@ namespace MyZoo.Migrations
                     {
                         AnimalId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Weight = c.String(),
+                        Weight = c.Int(nullable: false),
                         Sex = c.String(),
                         CountryOfOrigin_CountryOfOriginId = c.Int(),
                         ParentCouple_ParentCoupleId = c.Int(),
@@ -41,12 +41,12 @@ namespace MyZoo.Migrations
                 c => new
                     {
                         ParentCoupleId = c.Int(nullable: false, identity: true),
-                        MotherId = c.Int(nullable: false),
-                        FatherId = c.Int(nullable: false),
+                        MotherId = c.Int(),
+                        FatherId = c.Int(),
                     })
                 .PrimaryKey(t => t.ParentCoupleId)
-                .ForeignKey("dbo.Fathers", t => t.FatherId, cascadeDelete: true)
-                .ForeignKey("dbo.Mothers", t => t.MotherId, cascadeDelete: true)
+                .ForeignKey("dbo.Fathers", t => t.FatherId)
+                .ForeignKey("dbo.Mothers", t => t.MotherId)
                 .Index(t => t.MotherId)
                 .Index(t => t.FatherId);
             
@@ -54,21 +54,21 @@ namespace MyZoo.Migrations
                 "dbo.Fathers",
                 c => new
                     {
-                        AnimalId = c.Int(nullable: false),
+                        FatherId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.AnimalId)
-                .ForeignKey("dbo.Animals", t => t.AnimalId)
-                .Index(t => t.AnimalId);
+                .PrimaryKey(t => t.FatherId)
+                .ForeignKey("dbo.Animals", t => t.FatherId, cascadeDelete: true)
+                .Index(t => t.FatherId);
             
             CreateTable(
                 "dbo.Mothers",
                 c => new
                     {
-                        AnimalId = c.Int(nullable: false),
+                        MotherId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.AnimalId)
-                .ForeignKey("dbo.Animals", t => t.AnimalId)
-                .Index(t => t.AnimalId);
+                .PrimaryKey(t => t.MotherId)
+                .ForeignKey("dbo.Animals", t => t.MotherId, cascadeDelete: true)
+                .Index(t => t.MotherId);
             
             CreateTable(
                 "dbo.Species",
@@ -110,16 +110,16 @@ namespace MyZoo.Migrations
             DropForeignKey("dbo.Animals", "Species_SpeciesId", "dbo.Species");
             DropForeignKey("dbo.Species", "Type_TypeId", "dbo.Types");
             DropForeignKey("dbo.Species", "Environment_EnvironmentId", "dbo.Environments");
-            DropForeignKey("dbo.ParentCouples", "MotherId", "dbo.Mothers");
-            DropForeignKey("dbo.Mothers", "AnimalId", "dbo.Animals");
-            DropForeignKey("dbo.ParentCouples", "FatherId", "dbo.Fathers");
-            DropForeignKey("dbo.Fathers", "AnimalId", "dbo.Animals");
             DropForeignKey("dbo.Animals", "ParentCouple_ParentCoupleId", "dbo.ParentCouples");
+            DropForeignKey("dbo.ParentCouples", "MotherId", "dbo.Mothers");
+            DropForeignKey("dbo.Mothers", "MotherId", "dbo.Animals");
+            DropForeignKey("dbo.ParentCouples", "FatherId", "dbo.Fathers");
+            DropForeignKey("dbo.Fathers", "FatherId", "dbo.Animals");
             DropForeignKey("dbo.Animals", "CountryOfOrigin_CountryOfOriginId", "dbo.CountryOfOrigins");
             DropIndex("dbo.Species", new[] { "Type_TypeId" });
             DropIndex("dbo.Species", new[] { "Environment_EnvironmentId" });
-            DropIndex("dbo.Mothers", new[] { "AnimalId" });
-            DropIndex("dbo.Fathers", new[] { "AnimalId" });
+            DropIndex("dbo.Mothers", new[] { "MotherId" });
+            DropIndex("dbo.Fathers", new[] { "FatherId" });
             DropIndex("dbo.ParentCouples", new[] { "FatherId" });
             DropIndex("dbo.ParentCouples", new[] { "MotherId" });
             DropIndex("dbo.Animals", new[] { "Species_SpeciesId" });
