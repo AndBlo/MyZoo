@@ -38,15 +38,16 @@ namespace MyZoo
                 Discrimination = ComboBoxDiscrimination.Text,
                 Type = ComboBoxType.Text,
                 SpeciesSearch = TextBoxSearchSpecies.Text,
+                Environment = ComboBoxEnvironment.Text
             };
 
             var access = new DataAccessZoo();
-            var animal = access.GetDetailedAnimal(search);
+            var detailedAnimalList = access.GetDetailedAnimalList(search);
 
-            animal.AllowEdit = false;
-            animal.AllowNew = false;
+            detailedAnimalList.AllowEdit = false;
+            detailedAnimalList.AllowNew = false;
 
-            ListBoxResultList.ItemsSource = animal;
+            ListBoxResultList.ItemsSource = detailedAnimalList;
         }
 
         private void ButtonRemove_OnClick(object sender, RoutedEventArgs e)
@@ -77,7 +78,8 @@ namespace MyZoo
             LabelSex.Content = "";
             LabelWeight.Content = "";
             LabelType.Content = "";
-            ListBoxParentsTo.ItemsSource = null;
+            LabelSpecies.Content = "";
+            //ListBoxParentsTo.ItemsSource = null;
         }
 
         private void ListBoxResultList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,140 +99,34 @@ namespace MyZoo
                 LabelEnvironment.Content = animal.Environment;
                 LabelMother.Content = animal.Mother;
                 LabelFather.Content = animal.Father;
-                ListBoxParentsTo.ItemsSource = animal.ChildList;
+                //ListBoxParentsTo.ItemsSource = animal.ChildList;
             }
 
         }
 
-        private void LabelName_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            SetTextBoxTextToLabelText(LabelName, TextBoxName);
-        }
-
-        private void LabelSex_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelSex, TextBoxSex);
-        }
-
-        private void LabelWeight_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelWeight, TextBoxWeight);
-        }
-
-        private void LabelCountry_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelCountry, TextBoxCountry);
-        }
-
-        private void LabelSpecies_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelSpecies, TextBoxSpecies);
-        }
-
-        private void LabelType_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelType, TextBoxType);
-        }
-
-        private void LabelEnvironment_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelEnvironment, TextBoxEnvironment);
-        }
-
-        private void LabelMother_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelMother, TextBoxMother);
-        }
-
-        private void LabelFather_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            SetTextBoxTextToLabelText(LabelFather, TextBoxFather);
-        }
-
-        private void LabelParentsTo_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ListBoxParentsTo.Visibility = Visibility.Visible;
-        }
-
-        private void LabelId_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            TextBoxId.Visibility = Visibility.Visible;
-        }
-
-        private void TextBoxId_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelId, TextBoxId);
-        }
-
-        private void TextBoxName_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelName, TextBoxName);
-        }
-
-        private void TextBoxSex_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelSex, TextBoxSex);
-        }
-
-        private void TextBoxWeight_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelWeight, TextBoxWeight);
-        }
-
-        private void TextBoxCountry_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelCountry, TextBoxCountry);
-        }
-
-        private void TextBoxSpecies_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelSpecies, TextBoxSpecies);
-        }
-
-        private void TextBoxType_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelType, TextBoxType);
-        }
-
-        private void TextBoxEnvironment_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelEnvironment, TextBoxEnvironment);
-        }
-
-        private void TextBoxMother_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelMother, TextBoxMother);
-        }
-
-        private void TextBoxFather_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            SetLabelTextToTextBoxText(e, LabelFather, TextBoxFather);
-        }
-
-        private void ComboBoxParentsTo_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            //SetLabelTextToTextBoxText(e, LabelParentsTo, ComboBoxParentsTo);
-        }
-
-        private void SetLabelTextToTextBoxText(KeyEventArgs e, Label label, TextBox textBox)
-        {
-            if (e.Key == Key.Enter)
-            {
-                string text = TextBoxId.Text;
-                label.Content = "hej";
-                textBox.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void SetTextBoxTextToLabelText(Label label, TextBox textBox)
-        {
-            textBox.Visibility = Visibility.Visible;
-            string text = (string)label.Content;
-            TextBoxId.Text = "hej";
-        }
+        
 
         private void ButtonEditAnimal_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuItemAddAnimals_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuItemMakeVetAppointment_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MenuItemHandlePatients_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }

@@ -5,71 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyZoo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="380.533" Width="944.6">
+        Title="MainWindow" Height="474.133" Width="456.6">
     <Grid>
-        <Button Name="ButtonSearch" Content="Sök" Click="ButtonSearch_OnClick" HorizontalAlignment="Left" Margin="643,80,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <ListBox Name="ListBoxResultList" SelectionChanged="ListBoxResultList_OnSelectionChanged"  HorizontalAlignment="Left" Height="140" Margin="12,171,0,0" VerticalAlignment="Top" Width="168"/>
-        <ComboBox Name="ComboBoxType" HorizontalAlignment="Left" Margin="596,45,0,0" VerticalAlignment="Top" Width="120" Height="27">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="413*"/>
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Menu>
+                <MenuItem Header="Arkiv">
+                    <MenuItem Header="Avsluta" Click="MenuItem_OnClick"/>
+                </MenuItem>
+                <MenuItem Header="Zoo">
+                    <MenuItem Name="MenuItemAddAnimals" Header="Lägg till djur" Click="MenuItemAddAnimals_OnClick"/>
+                    <MenuItem Name="MenuItemMakeVetAppointment" Header="Boka tid hos veterinär" Click="MenuItemMakeVetAppointment_OnClick"/>
+                </MenuItem>
+                <MenuItem Header="Veterinär">
+                    <MenuItem Name="MenuItemHandlePatients" Header="Ta emot patient" Click="MenuItemHandlePatients_OnClick"/>
+                </MenuItem>
+            </Menu>
+        </ToolBar>
+        <Button Name="ButtonSearch" Content="Sök" Click="ButtonSearch_OnClick" HorizontalAlignment="Left" Margin="158,195.4,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Row="1"/>
+        <ListBox Name="ListBoxResultList" SelectionChanged="ListBoxResultList_OnSelectionChanged"  HorizontalAlignment="Left" Height="118" Margin="17,261.4,0,0" VerticalAlignment="Top" Width="216" Grid.Row="1"/>
+        <ComboBox Name="ComboBoxType" HorizontalAlignment="Left" Margin="113,124.4,0,0" VerticalAlignment="Top" Width="120" Height="27" Grid.Row="1">
             <ComboBoxItem Content="--------" IsSelected="True"/>
-            <ComboBoxItem Content="Alla"/>
             <ComboBoxItem Content="Växtätare"/>
             <ComboBoxItem Content="Köttätare"/>
         </ComboBox>
-        <ComboBox Name="ComboBoxEnvironment" HorizontalAlignment="Left" Margin="452,45,0,0" VerticalAlignment="Top" Width="120" Height="27">
+        <ComboBox Name="ComboBoxEnvironment" HorizontalAlignment="Left" Margin="113,83.4,0,0" VerticalAlignment="Top" Width="120" Height="27" Grid.Row="1">
             <ComboBoxItem Content="--------" IsSelected="True"/>
-            <ComboBoxItem Content="Alla"/>
             <ComboBoxItem Content="Mark"/>
             <ComboBoxItem Content="Träd"/>
             <ComboBoxItem Content="Vatten"/>
         </ComboBox>
-        <ComboBox Name="ComboBoxDiscrimination" HorizontalAlignment="Left" Margin="307,45,0,0" VerticalAlignment="Top" Width="120" Height="27">
+        <ComboBox Name="ComboBoxDiscrimination" HorizontalAlignment="Left" Margin="113,43.4,0,0" VerticalAlignment="Top" Width="120" Height="27" Grid.Row="1">
             <ComboBoxItem Content="--------" IsSelected="True"/>
+            <ComboBoxItem Content="Barn"/>
             <ComboBoxItem Content="Förälder"/>
             <ComboBoxItem Content="Moder"/>
             <ComboBoxItem Content="Fader"/>
         </ComboBox>
-        <Label Content="Sökvillkor" HorizontalAlignment="Left" Margin="221,45,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Content="Resultat" HorizontalAlignment="Left" Margin="12,140,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Button Name="ButtonRemove" Content="Ta bort" Click="ButtonRemove_OnClick" HorizontalAlignment="Left" Margin="17,316,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="TextBoxSearchSpecies" HorizontalAlignment="Left" Height="23" Margin="468,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="156"/>
-        <Label Content="Art" HorizontalAlignment="Left" Margin="418,78,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-        <Label Content="Namn" HorizontalAlignment="Left" Margin="218,140,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Content="Kön" HorizontalAlignment="Left" Margin="304,140,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
-        <Label Content="Vikt" HorizontalAlignment="Left" Margin="347,140,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
-        <Label Content="Land" HorizontalAlignment="Left" Margin="397,140,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Content="Art" HorizontalAlignment="Left" Margin="483,140,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
-        <Label Content="Typ" HorizontalAlignment="Left" Margin="551,140,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
-        <Label Content="Miljö" HorizontalAlignment="Left" Margin="619,140,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Content="Moder" HorizontalAlignment="Left" Margin="762,140,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
-        <Label Content="Fader" HorizontalAlignment="Left" Margin="705,140,0,0" VerticalAlignment="Top" Height="26" Width="52"/>
-        <Label Content="Förälder till" HorizontalAlignment="Left" Margin="821,140,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Content="Id" HorizontalAlignment="Left" Margin="185,140,0,0" VerticalAlignment="Top" Height="26" Width="28" />
-        <Label Name="LabelName" MouseDoubleClick="LabelName_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="218,179,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Name="LabelSex" MouseDoubleClick="LabelSex_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="304,179,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
-        <Label Name="LabelWeight" MouseDoubleClick="LabelWeight_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="347,179,0,0" VerticalAlignment="Top" Height="26" Width="38"/>
-        <Label Name="LabelCountry" MouseDoubleClick="LabelCountry_OnMouseDoubleClick"  HorizontalAlignment="Left" Margin="397,179,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Name="LabelSpecies" MouseDoubleClick="LabelSpecies_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="483,179,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
-        <Label Name="LabelType" MouseDoubleClick="LabelType_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="551,179,0,0" VerticalAlignment="Top" Height="26" Width="63"/>
-        <Label Name="LabelEnvironment" MouseDoubleClick="LabelEnvironment_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="619,179,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Label Name="LabelMother" MouseDoubleClick="LabelMother_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="762,179,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
-        <Label Name="LabelFather" MouseDoubleClick="LabelFather_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="705,179,0,0" VerticalAlignment="Top" Height="26" Width="52"/>
-        <!--<Label Name="LabelParentsTo" MouseDoubleClick="LabelParentsTo_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="757,179,0,0" VerticalAlignment="Top" Height="26" Width="81"/>-->
-        <Label Name="LabelId" MouseDoubleClick="LabelId_OnMouseDoubleClick" HorizontalAlignment="Left" Margin="185,140,0,0" VerticalAlignment="Top" Height="26" Width="28" />
-        <TextBox Name="TextBoxId" KeyDown="TextBoxId_OnKeyDown" HorizontalAlignment="Left" Margin="121,179,0,0" VerticalAlignment="Top" Height="26" Width="28" Visibility="Hidden"/>
-        <TextBox Name="TextBoxName" KeyDown="TextBoxName_OnKeyDown" HorizontalAlignment="Left" Margin="218,179,0,0" VerticalAlignment="Top" Height="26" Width="81" Visibility="Hidden"/>
-        <TextBox Name="TextBoxSex" KeyDown="TextBoxSex_OnKeyDown" HorizontalAlignment="Left" Margin="304,179,0,0" VerticalAlignment="Top" Height="26" Width="38" Visibility="Hidden"/>
-        <TextBox Name="TextBoxWeight" KeyDown="TextBoxWeight_OnKeyDown" HorizontalAlignment="Left" Margin="347,179,0,0" VerticalAlignment="Top" Height="26" Width="38" Visibility="Hidden"/>
-        <TextBox Name="TextBoxCountry" KeyDown="TextBoxCountry_OnKeyDown" HorizontalAlignment="Left" Margin="397,179,0,0" VerticalAlignment="Top" Height="26" Width="81" Visibility="Hidden"/>
-        <TextBox Name="TextBoxSpecies" KeyDown="TextBoxSpecies_OnKeyDown" HorizontalAlignment="Left" Margin="483,179,0,0" VerticalAlignment="Top" Height="26" Width="63" Visibility="Hidden"/>
-        <TextBox Name="TextBoxType" KeyDown="TextBoxType_OnKeyDown" HorizontalAlignment="Left" Margin="551,179,0,0" VerticalAlignment="Top" Height="26" Width="63" Visibility="Hidden"/>
-        <TextBox Name="TextBoxEnvironment" KeyDown="TextBoxEnvironment_OnKeyDown" HorizontalAlignment="Left" Margin="619,179,0,0" VerticalAlignment="Top" Height="26" Width="81" Visibility="Hidden"/>
-        <TextBox Name="TextBoxMother" KeyDown="TextBoxMother_OnKeyDown" HorizontalAlignment="Left" Margin="762,179,0,0" VerticalAlignment="Top" Height="26" Width="54" Visibility="Hidden"/>
-        <TextBox Name="TextBoxFather" KeyDown="TextBoxFather_OnKeyDown" HorizontalAlignment="Left" Margin="705,179,0,0" VerticalAlignment="Top" Height="26" Width="52" Visibility="Hidden"/>
-        <ListBox Name="ListBoxParentsTo" HorizontalAlignment="Left" Margin="821,179,0,0" VerticalAlignment="Top" Height="96" Width="81"/>
-        <Label Content="Diskriminering" HorizontalAlignment="Left" Margin="307,14,0,0" VerticalAlignment="Top"/>
-        <Label Content="Miljö" HorizontalAlignment="Left" Margin="452,14,0,0" VerticalAlignment="Top"/>
-        <Label Content="Typ" HorizontalAlignment="Left" Margin="596,14,0,0" VerticalAlignment="Top"/>
-        <Button Name="ButtonEditAnimal" Content="Redigera" Click="ButtonEditAnimal_OnClick" HorizontalAlignment="Left" Margin="97,316,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Sökvillkor" HorizontalAlignment="Left" Margin="113,12.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Content="Resultat" HorizontalAlignment="Left" Margin="17,228.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Button Name="ButtonRemove" Content="Ta bort" Click="ButtonRemove_OnClick" HorizontalAlignment="Left" Margin="17,384.4,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
+        <TextBox x:Name="TextBoxSearchSpecies" HorizontalAlignment="Left" Height="23" Margin="113,167.4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label Content="Art" HorizontalAlignment="Left" Margin="17,164.4,0,0" VerticalAlignment="Top" Height="26" Width="45" Grid.Row="1"/>
+        <Label Content="Namn" HorizontalAlignment="Left" Margin="260,54.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Content="Kön" HorizontalAlignment="Left" Margin="260,85.4,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Label Content="Vikt" HorizontalAlignment="Left" Margin="260,116.4,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Label Content="Land" HorizontalAlignment="Left" Margin="260,147.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Content="Art" HorizontalAlignment="Left" Margin="260,178.4,0,0" VerticalAlignment="Top" Height="26" Width="63" Grid.Row="1"/>
+        <Label Content="Typ" HorizontalAlignment="Left" Margin="260,209.4,0,0" VerticalAlignment="Top" Height="26" Width="63" Grid.Row="1"/>
+        <Label Content="Miljö" HorizontalAlignment="Left" Margin="260,240.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Content="Moder" HorizontalAlignment="Left" Margin="260,302.4,0,0" VerticalAlignment="Top" Height="26" Width="54" Grid.Row="1"/>
+        <Label Content="Fader" HorizontalAlignment="Left" Margin="260,271.4,0,0" VerticalAlignment="Top" Height="26" Width="52" Grid.Row="1"/>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="260,23.4,0,0" VerticalAlignment="Top" Height="26" Width="28" Grid.Row="1" />
+        <Label Name="LabelName" HorizontalAlignment="Left" Margin="346,54.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Name="LabelSex" HorizontalAlignment="Left" Margin="346,85.4,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Label Name="LabelWeight" HorizontalAlignment="Left" Margin="346,116.4,0,0" VerticalAlignment="Top" Height="26" Width="38" Grid.Row="1"/>
+        <Label Name="LabelCountry" HorizontalAlignment="Left" Margin="346,147.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Name="LabelSpecies" HorizontalAlignment="Left" Margin="346,178.4,0,0" VerticalAlignment="Top" Height="26" Width="63" Grid.Row="1"/>
+        <Label Name="LabelType" HorizontalAlignment="Left" Margin="346,209.4,0,0" VerticalAlignment="Top" Height="26" Width="63" Grid.Row="1"/>
+        <Label Name="LabelEnvironment" HorizontalAlignment="Left" Margin="346,240.4,0,0" VerticalAlignment="Top" Height="26" Width="81" Grid.Row="1"/>
+        <Label Name="LabelMother" HorizontalAlignment="Left" Margin="346,302.4,0,0" VerticalAlignment="Top" Height="26" Width="54" Grid.Row="1"/>
+        <Label Name="LabelFather" HorizontalAlignment="Left" Margin="346,271.4,0,0" VerticalAlignment="Top" Height="26" Width="52" Grid.Row="1"/>
+        <Label Name="LabelId" HorizontalAlignment="Left" Margin="346,23.4,0,0" VerticalAlignment="Top" Height="26" Width="28" Grid.Row="1"  />
+        <Label Content="Diskriminering" HorizontalAlignment="Left" Margin="17,41.4,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Miljö" HorizontalAlignment="Left" Margin="17,84.4,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Typ" HorizontalAlignment="Left" Margin="17,125.4,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button Name="ButtonEditAnimal" Content="Redigera" Click="ButtonEditAnimal_OnClick" HorizontalAlignment="Left" Margin="158,384.4,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
 
     </Grid>
 </Window>

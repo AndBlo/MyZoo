@@ -12,5 +12,6 @@ namespace MyZoo.Model
         public string Type { get; set; }
         public string SpeciesSearch { get; set; }
         public string NameSearch { get; set; }
+        public string Environment { get; set; }
     }
 }

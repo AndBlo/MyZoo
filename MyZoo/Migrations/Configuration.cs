@@ -186,11 +186,21 @@ namespace MyZoo.Migrations
                 AnimalFather = sealFatherRoger
             };
 
+            //context.Families.Attach(bearFamily);
+            //context.Families.Attach(parrotFamily);
+            //context.Families.Attach(sealFamily);
+
             context.Families.AddOrUpdate(f => f.FamilyId,
                 bearFamily,
                 parrotFamily,
                 sealFamily
                 );
+
+            //context.Animals.AddOrUpdate(a => a.Name,
+            //    bearChildBjorne,
+            //    parrotChildSvea,
+            //    sealChildSara
+            //    );
 
             //context.SaveChanges();
         }
