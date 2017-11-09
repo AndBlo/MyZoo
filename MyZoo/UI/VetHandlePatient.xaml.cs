@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MyZoo.UI
 {
     /// <summary>
-    /// Interaction logic for EditAnimal.xaml
+    /// Interaction logic for VetHandlePatient.xaml
     /// </summary>
-    public partial class EditAnimal : Window
+    public partial class VetHandlePatient : Window
     {
-        public EditAnimal()
+        public VetHandlePatient()
         {
             InitializeComponent();
         }

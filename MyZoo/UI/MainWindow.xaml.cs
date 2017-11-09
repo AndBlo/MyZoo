@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MyZoo.Migrations;
+using MyZoo.UI;
 
 namespace MyZoo
 {
@@ -42,7 +43,7 @@ namespace MyZoo
             };
 
             var access = new DataAccessZoo();
-            var detailedAnimalList = access.GetDetailedAnimalList(search);
+            var detailedAnimalList = access.GetDetailedAnimalListBySearchTerms(search);
 
             detailedAnimalList.AllowEdit = false;
             detailedAnimalList.AllowNew = false;
@@ -108,27 +109,39 @@ namespace MyZoo
 
         private void ButtonEditAnimal_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            var animal = (AnimalDetailed) ListBoxResultList.SelectedItem;
+            if (animal != null)
+            {
+                AddOrEditAnimal addOrEdit = new AddOrEditAnimal(animal);
+                addOrEdit.Show();
+            }
+            else
+            {
+                MessageBox.Show("Inget djur är markerat för redigering.");
+            }
         }
 
         private void MenuItemAddAnimals_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            AddOrEditAnimal addOrEdit = new AddOrEditAnimal();
+            addOrEdit.Show();
         }
 
         private void MenuItemMakeVetAppointment_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MakeVetAppointment booking = new MakeVetAppointment();
+            booking.Show();
         }
 
         private void MenuItemHandlePatients_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            VetHandlePatient vet = new VetHandlePatient();
+            vet.Show();
+        }
+
+        private void MenuItemQuit_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

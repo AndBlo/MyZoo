@@ -96,11 +96,24 @@
     <Compile Include="Migrations\201711071854053_ChangeWeightFromDecimalToFloat.Designer.cs">
       <DependentUpon>201711071854053_ChangeWeightFromDecimalToFloat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091215306_ChangeDateAndTimeToSingleDateTimeInBookings.cs" />
+    <Compile Include="Migrations\201711091215306_ChangeDateAndTimeToSingleDateTimeInBookings.Designer.cs">
+      <DependentUpon>201711091215306_ChangeDateAndTimeToSingleDateTimeInBookings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\AnimalSimple.cs" />
+    <Compile Include="Model\AnimalBooking.cs" />
+    <Compile Include="Model\Veterinary.cs" />
+    <Compile Include="UI\MakeVetAppointment.xaml.cs">
+      <DependentUpon>MakeVetAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\VetAppointmentBooking.xaml.cs">
       <DependentUpon>VetAppointmentBooking.xaml</DependentUpon>
     </Compile>
-    <Page Include="UI\EditAnimal.xaml">
+    <Compile Include="UI\VetHandlePatient.xaml.cs">
+      <DependentUpon>VetHandlePatient.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UI\AddOrEditAnimal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,16 +126,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL\DataAccessZoo.cs" />
-    <Compile Include="Model\Animal.cs" />
+    <Compile Include="Model\AnimalDetailed.cs" />
     <Compile Include="Model\UserSearchModel.cs" />
-    <Compile Include="UI\EditAnimal.xaml.cs">
-      <DependentUpon>EditAnimal.xaml</DependentUpon>
+    <Compile Include="UI\AddOrEditAnimal.xaml.cs">
+      <DependentUpon>AddOrEditAnimal.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\MakeVetAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\VetAppointmentBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\VetHandlePatient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711071854053_ChangeWeightFromDecimalToFloat.resx">
       <DependentUpon>201711071854053_ChangeWeightFromDecimalToFloat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091215306_ChangeDateAndTimeToSingleDateTimeInBookings.resx">
+      <DependentUpon>201711091215306_ChangeDateAndTimeToSingleDateTimeInBookings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

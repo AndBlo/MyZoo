@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace MyZoo.DAL
 
         }
 
-        public BindingList<AnimalDetailed> GetDetailedAnimalList(UserSearchModel search)
+        public BindingList<AnimalDetailed> GetDetailedAnimalListBySearchTerms(UserSearchModel search)
         {
             BindingList<AnimalDetailed> list = null;
 
@@ -114,24 +115,24 @@ namespace MyZoo.DAL
                                 break;
                             case "Barn":
                                 var queryDiscriminationChild = from animal in queryEnvironment
-                                    from family in db.Families
-                                    where animal.AnimalId == family.AnimalChild.AnimalId
-                                    join animalFamily in db.Families
-                                        on animal.AnimalId equals animalFamily.ChildId into animalChildFamily
-                                    from af in animalChildFamily.DefaultIfEmpty()
-                                    select new AnimalDetailed()
-                                    {
-                                        AnimalId = animal.AnimalId,
-                                        CountryOfOrigin = animal.Country.Name,
-                                        Environment = animal.Species.Environment.Name,
-                                        Father = af.AnimalFather.Name,
-                                        Mother = af.AnimalMother.Name,
-                                        Name = animal.Name,
-                                        Sex = animal.Sex,
-                                        Species = animal.Species.Name,
-                                        Type = animal.Species.Type.Name,
-                                        WeightInKilogram = animal.Weight,
-                                    };
+                                                               from family in db.Families
+                                                               where animal.AnimalId == family.AnimalChild.AnimalId
+                                                               join animalFamily in db.Families
+                                                                   on animal.AnimalId equals animalFamily.ChildId into animalChildFamily
+                                                               from af in animalChildFamily.DefaultIfEmpty()
+                                                               select new AnimalDetailed()
+                                                               {
+                                                                   AnimalId = animal.AnimalId,
+                                                                   CountryOfOrigin = animal.Country.Name,
+                                                                   Environment = animal.Species.Environment.Name,
+                                                                   Father = af.AnimalFather.Name,
+                                                                   Mother = af.AnimalMother.Name,
+                                                                   Name = animal.Name,
+                                                                   Sex = animal.Sex,
+                                                                   Species = animal.Species.Name,
+                                                                   Type = animal.Species.Type.Name,
+                                                                   WeightInKilogram = animal.Weight,
+                                                               };
                                 list = new BindingList<AnimalDetailed>(queryDiscriminationChild.ToList());
                                 break;
                         }
@@ -188,6 +189,220 @@ namespace MyZoo.DAL
             return list;
         }
 
+        public BindingList<AnimalSimple> GetSimpleAnimalByName(string name)
+        {
+            BindingList<AnimalSimple> list = null;
+            using (var db = new ZooDataBaseContext())
+            {
+                var query = from animal in db.Animals
+                    where animal.Name.Contains(name)
+                    select new AnimalSimple()
+                    {
+                        AnimalId = animal.AnimalId,
+                        Name = animal.Name,
+                        Species = animal.Species.Name
+                    };
+                list = new BindingList<AnimalSimple>(query.ToList());
+            }
+
+            return list;
+        }
+
+        public BindingList<Veterinary> GetVeterinaryList()
+        {
+            BindingList<Veterinary> list = null;
+            using (var db = new ZooDataBaseContext())
+            {
+                var query = from vet in db.Veterinarians
+                    select new Veterinary()
+                    {
+                        Id = vet.VeterinaryId,
+                        Name = vet.Namn
+                    };
+                list = new BindingList<Veterinary>(query.ToList());
+            }
+
+            return list;
+        }
+
+        public void AddOrUpdateAnimal(AnimalDetailed animalDetailed)
+        {
+            using (var db = new ZooDataBaseContext())
+            {
+                Country country = GetOrCreateCountry(animalDetailed, db);
+                Species species = GetOrCreateSpecies(animalDetailed, db);
+                Animal animal = null;
+                if (animalDetailed.AnimalId == 0)
+                {
+                    animal = new Animal()
+                    {
+                        Name = animalDetailed.Name,
+                        Sex = animalDetailed.Sex,
+                        Weight = animalDetailed.WeightInKilogram,
+                        Country = country,
+                        Species = species
+                    };
+                }
+                else
+                {
+                    animal = GetAndAlterAnimal(animalDetailed, db, country, species);
+                }
+
+                Animal mother = GetOrCreateAnimalMother(animalDetailed, db, country, species);
+                Animal father = GetOrCreateAnimalFather(animalDetailed, db, country, species);
+
+                var family = db.Families.Where(f => f.AnimalChild.AnimalId == animalDetailed.AnimalId)
+                    .Select(f => f)
+                    .FirstOrDefault();
+                if (family != null)
+                {
+                    family.AnimalFather = father;
+                    family.AnimalMother = mother;
+                    family.AnimalChild = animal;
+
+                    db.Families.AddOrUpdate(f => f.FamilyId,
+                        family
+                        );
+                }
+                else if (family == null && (animalDetailed.Mother != "" || animalDetailed.Mother != ""))
+                {
+                    family = new Family()
+                    {
+                        AnimalChild = animal,
+                        AnimalMother = mother,
+                        AnimalFather = father
+                    };
+
+                    db.Families.AddOrUpdate(f => f.ChildId,
+                        family
+                    );
+                }
+                else
+                {
+                    db.Animals.AddOrUpdate(a => a.AnimalId,
+                        animal
+                        );
+                }
+
+                db.SaveChanges();
+
+            }
+        }
+
+        private static Animal GetAndAlterAnimal(AnimalDetailed animalDetailed, ZooDataBaseContext db, Country country, Species species)
+        {
+            var animal = db.Animals.Find(animalDetailed.AnimalId);
+
+            animal.Country = country;
+            animal.Species = species;
+            animal.Name = animalDetailed.Name;
+            animal.Sex = animalDetailed.Sex;
+            animal.Weight = animalDetailed.WeightInKilogram;
+            return animal;
+        }
+
+        private static Animal GetOrCreateAnimalFather(AnimalDetailed animalDetailed, ZooDataBaseContext db, Country country, Species species)
+        {
+            var father = db.Families.Where(f => f.AnimalFather.Name == animalDetailed.Father)
+                                .Select(f => f.AnimalFather).FirstOrDefault();
+            var newFather = db.Animals.Where(a => a.Name == animalDetailed.Father)
+                .Select(a => a).FirstOrDefault();
+            if (father == null && newFather == null && animalDetailed.Father != "")
+            {
+                father = new Animal()
+                {
+                    Name = animalDetailed.Father,
+                    Country = country,
+                    Species = species,
+                    Weight = 0,
+                    Sex = "Hane"
+                };
+
+                return father;
+            }
+            if (father == null && newFather != null)
+            {
+                return newFather;
+            }
+            else
+            {
+                return father;
+            }
+        }
+
+        private static Animal GetOrCreateAnimalMother(AnimalDetailed animalDetailed, ZooDataBaseContext db, Country country, Species species)
+        {
+            var mother = db.Families.Where(f => f.AnimalMother.Name == animalDetailed.Mother)
+                                .Select(f => f.AnimalMother).FirstOrDefault();
+            var newMother = db.Animals.Where(a => a.Name == animalDetailed.Mother)
+                                .Select(a => a).FirstOrDefault();
+            if (mother == null && newMother == null && animalDetailed.Mother != "")
+            {
+                mother = new Animal()
+                {
+                    Name = animalDetailed.Mother,
+                    Country = country,
+                    Species = species,
+                    Weight = 0,
+                    Sex = "Hona"
+                };
+
+                return mother;
+            }
+            if (mother == null && newMother != null)
+            {
+                return newMother;
+            }
+            else
+            {
+                return mother;
+            }
+        }
+
+        private static Species GetOrCreateSpecies(AnimalDetailed animalDetailed, ZooDataBaseContext db)
+        {
+            var environment = db.Environments.Where(e => e.Name == animalDetailed.Environment).Select(e => e).FirstOrDefault();
+            var type = db.Types.Where(t => t.Name == animalDetailed.Type).Select(t => t).FirstOrDefault();
+
+            var species = db.Species.Where(s => s.Name == animalDetailed.Species).Select(s => s).FirstOrDefault();
+            if (species == null)
+            {
+                species = new Species()
+                {
+                    Name = animalDetailed.Species,
+                    Environment = environment,
+                    Type = type
+                };
+            }
+            else
+            {
+                if (species.Environment.Name != animalDetailed.Environment)
+                {
+                    throw new InvalidOperationException($"Arten \"{species.Name}\" kan inte ha {animalDetailed.Environment} som miljö.");
+                }
+                if (species.Type.Name != animalDetailed.Type)
+                {
+                    throw new InvalidOperationException($"Arten \"{species.Name}\" kan inte anges som {animalDetailed.Type}.");
+                }
+            }
+
+            return species;
+        }
+
+        private static Country GetOrCreateCountry(AnimalDetailed animalDetailed, ZooDataBaseContext db)
+        {
+            var country = db.Countries.Where(c => c.Name == animalDetailed.CountryOfOrigin).Select(c => c).FirstOrDefault();
+            if (country == null)
+            {
+                country = new Country()
+                {
+                    Name = animalDetailed.CountryOfOrigin
+                };
+            }
+
+            return country;
+        }
+
         public void RemoveAnimal(int animalId)
         {
             using (var db = new ZooDataBaseContext())
@@ -226,5 +441,23 @@ namespace MyZoo.DAL
                 db.SaveChanges();
             }
         }
+
+        //public BindingList<AnimalBooking> GetBookingByAnimalIdList(int animalId)
+        //{
+        //    BindingList<AnimalBooking> list = null;
+
+        //    using (var db = new ZooDataBaseContext())
+        //    {
+        //        var query = from booking in db.Bookings
+        //                    where booking.AnimalId == animalId
+        //                    select new AnimalBooking()
+        //                    {
+        //                        AnimalId = booking.AnimalId,
+        //                        AnimalName = booking.Animal.Name,
+        //                        BookingId = booking.BookingId,
+        //                        DateTime = booking.
+        //                    }
+        //    }
+        //}
     }
 }

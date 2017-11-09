@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyZoo.Model
 {
-    class AnimalDetailed
+    public class AnimalDetailed
     {
         public int AnimalId { get; set; }
         public string Name { get; set; }

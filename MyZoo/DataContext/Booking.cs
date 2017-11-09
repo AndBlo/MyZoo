@@ -14,10 +14,10 @@ namespace MyZoo.DataContext
 
         public int VeterinaryId { get; set; }
 
-        public TimeSpan StartTime { get; set; }
+        //public TimeSpan StartTime { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime Date { get; set; }
+        [Column(TypeName = "dateTime")]
+        public DateTime DateTime { get; set; }
 
         public virtual Animal Animal { get; set; }
 

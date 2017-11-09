@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyZoo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="474.133" Width="456.6">
+        Title="MainWindow" Height="498.533" Width="456.6">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32*"/>
@@ -14,7 +14,7 @@
         <ToolBar>
             <Menu>
                 <MenuItem Header="Arkiv">
-                    <MenuItem Header="Avsluta" Click="MenuItem_OnClick"/>
+                    <MenuItem Name="MenuItemQuit" Header="Avsluta" Click="MenuItemQuit_OnClick"/>
                 </MenuItem>
                 <MenuItem Header="Zoo">
                     <MenuItem Name="MenuItemAddAnimals" Header="Lägg till djur" Click="MenuItemAddAnimals_OnClick"/>
